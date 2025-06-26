@@ -1,0 +1,18 @@
+{
+  "name": "team-tracker",
+  "version": "1.0.0",
+  "description": "Team Tracker Sistema simples de gerenciamento de pessoas com Node.js, Express, MySQL e Handlebars. Permite cadastrar, listar, editar e excluir membros da equipe.  ✅ Funcionalidades Cadastro, edição, exclusão e listagem de pessoas  Layout responsivo  Estrutura com padrão MVC  🛠️ Tecnologias Node.js + Express  MySQL  Handlebars  HTML, CSS e JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.10"
+  }
+}

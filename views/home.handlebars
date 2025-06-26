@@ -1,0 +1,154 @@
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Team Tracker</h1>
+      <a href="#" id="openModal" class="btn-add">+ Novo Funcionário</a>
+    </header>
+
+    <form action="/" method="GET" style="margin-bottom: 20px;">
+      <input
+        type="text"
+        name="search"
+        placeholder="Buscar funcionário..."
+        value="{{search}}"
+        style="padding: 8px; font-size: 1rem;"
+      />
+      <button type="submit" style="padding: 8px 16px;">Buscar</button>
+    </form>
+
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cargo</th>
+          <th>Data de Entrada</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if employee.length}}
+          {{#each employee}}
+          <tr>
+            <td><a href="/team/details/{{this.id}}"><strong>{{this.name}}</strong></a></td>
+            <td><strong>{{this.role}}</strong></td>
+            <td>{{formatDate this.start_date}}</td>
+            <td>
+              {{#if this.status}}
+                <span class="status ativo">Ativo</span>
+              {{else}}
+                <span class="status inativo">Inativo</span>
+              {{/if}}
+            </td>
+            <td class="actions">
+              <form action="/team/remove/{{this.id}}" method="post" style="display:inline;">
+                <button type="submit" class="btn delete" onclick="return confirm('Deseja remover este funcionário?')">REMOVER</button>
+              </form>
+              <a href="#" class="btn edit openModalEdit"
+                data-id="{{this.id}}"
+                data-name="{{this.name}}"
+                data-role="{{this.role}}"
+                data-email="{{this.email}}"
+                data-phone="{{this.phone}}"
+                data-date="{{formatDate this.start_date}}"
+                data-status="{{this.status}}"
+                data-notes="{{this.notes}}"
+                data-department="{{this.department}}"
+              >EDITAR</a>
+            </td>
+          </tr>
+          {{/each}}
+        {{else}}
+          <tr>
+            <td colspan="5" style="text-align:center; font-weight:bold; padding: 20px;">
+              Nenhum funcionário encontrado.
+            </td>
+          </tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Novo Funcionário -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Novo Funcionário</h2>
+
+      <form action="/team/employee" method="post" id="novoFuncionarioForm">
+        <label for="name">Nome:</label>
+        <input type="text" name="name" required />
+
+        <label for="role">Cargo:</label>
+        <input type="text" name="role" required />
+
+        <label for="">Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Telefone:</label>
+        <input type="tel" name="phone" required />
+
+        <label>Data de Entrada:</label>
+        <input type="date" name="start_date" required />
+
+        <label>Departamento: </label>
+        <input type="text" name="department" required>
+
+        <label>Observações: </label>
+        <input type="text" name="notes">
+
+        <label>Status:</label>
+        <select name="status" required>
+          <option value="true">Ativo</option>
+          <option value="false">Inativo</option>
+        </select>
+
+        <button type="submit" class="btn-submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Editar Funcionário -->
+  <div id="modal-edit" class="modal">
+    <div class="modal-content">
+      <span id="closeModalEdit" class="close">&times;</span>
+      <h2>Editar Funcionário</h2>
+
+      <form action="/team/updateemployee" method="post" id="editFuncionarioForm">
+        <input type="hidden" name="id" id="edit-id" />
+
+        <label for="edit-name">Nome:</label>
+        <input type="text" name="name" id="edit-name" required />
+
+        <label for="edit-role">Cargo:</label>
+        <input type="text" name="role" id="edit-role" required />
+
+        <label for="edit-email">Email:</label>
+        <input type="email" name="email" id="edit-email" required />
+
+        <label for="edit-phone">Telefone:</label>
+        <input type="tel" name="phone" id="edit-phone" required />
+
+        <label for="edit-date">Data de Entrada:</label>
+        <input type="date" name="start_date" id="edit-date" required />
+
+        <label for="edit-notes">Observações: </label>
+        <input type="text" name="notes" id="edit-notes">
+        
+        <label for="edit-department">Departamento: </label>
+        <input type="text" name="department" id="edit-department">
+
+        <label for="edit-status">Status:</label>
+        <select name="status" id="edit-status" required>
+          <option value="true">Ativo</option>
+          <option value="false">Inativo</option>
+        </select>
+
+        <button type="submit" class="btn-submit">Salvar Alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/modal.js"></script>
+  <script src="/js/modal-edit.js"></script>
+</body>

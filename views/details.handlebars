@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/css/employee-details.css" />
+
+<div class="employee-container">
+  <div class="employee-card">
+    <div class="header-section">
+      <div class="avatar-circle">{{employee.name.[0]}}</div>
+      <div class="info-header">
+        <h2>{{employee.name}}</h2>
+        <p class="role">{{employee.role}}</p>
+        <span class="badge {{#if employee.status}}active{{else}}inactive{{/if}}">
+          {{#if employee.status}}Ativo{{else}}Inativo{{/if}}
+        </span>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <h4>Email</h4>
+        <p>{{employee.email}}</p>
+      </div>
+      <div class="info-item">
+        <h4>Telefone</h4>
+        <p>{{employee.phone}}</p>
+      </div>
+      <div class="info-item">
+        <h4>Data de Início</h4>
+        <p>{{formatDate employee.start_date}}</p>
+      </div>
+      <div class="info-item">
+        <h4>Departamento</h4>
+        <p>{{employee.department}}</p>
+      </div>
+      <div class="info-item">
+        <h4>Cargo</h4>
+        <p>{{employee.role}}</p>
+      </div>
+      <div class="info-item">
+        <h4>Observações</h4>
+        <p>{{employee.notes}}</p>
+      </div>
+    </div>
+
+    <div class="btn-area">
+      <a href="/" class="btn-back">← Voltar</a>
+    </div>
+  </div>
+</div>
